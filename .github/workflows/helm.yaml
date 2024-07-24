@@ -17,9 +17,8 @@ jobs:
       pull-requests: read  # for dorny/paths-filter to read pull requests
     runs-on: ubuntu-latest
     if: |
-      (github.repository == 'plexinc/pms-docker')
+      (github.repository == 'kriegalex/pms-docker')
     outputs:
-      docs: ${{ steps.filter.outputs.docs }}
       charts: ${{ steps.filter.outputs.charts }}
 
     steps:
@@ -41,7 +40,6 @@ jobs:
           filters: |
             charts:
               - 'charts/plex-media-server/Chart.yaml'
-              - 'charts/plex-media-server/values.yaml'
 
   chart:
     name: Release Chart
@@ -53,7 +51,7 @@ jobs:
     needs:
       - changes
     if: |
-      (github.repository == 'plexinc/pms-docker') &&
+      (github.repository == 'kriegalex/pms-docker') &&
       (needs.changes.outputs.charts == 'true')
 
     steps:
